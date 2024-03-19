@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonLigacao;
     Button buttonMapa;
     Button buttonSite;
+    Button buttonNavegar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         buttonLigacao = (Button) findViewById(R.id.buttonLigacao);
         buttonMapa = (Button) findViewById(R.id.buttonMapa);
         buttonSite = (Button) findViewById(R.id.buttonSite);
+        buttonNavegar = (Button) findViewById(R.id.buttonNavegar);
         // Sobrescrita do método click do botão
         buttonEnviaMensagem.setOnClickListener(v -> {
             Intent intent = new Intent(this, TelaMensagemActivity.class);
@@ -59,6 +61,33 @@ public class MainActivity extends AppCompatActivity {
             else {
                 ActivityCompat.requestPermissions(this, new String[]{ android.Manifest.permission.INTERNET },1);
             }
+        });
+
+        buttonNavegar.setOnClickListener(v -> {
+            Uri uri = Uri.parse("google.navigation:q=Avenida+general+carneiro+1427");
+            Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+
+            int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET);
+
+            if(this.verifyPermission(permissionCheck)) startActivity(intent);
+
+            else {
+                ActivityCompat.requestPermissions(this, new String[]{ android.Manifest.permission.INTERNET },1);
+            }
+        });
+
+        buttonMapa.setOnClickListener(v -> {
+            Uri uri = Uri.parse("geo:0,0?q=Avenida+general+carneiro+1427");
+            Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+
+            int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET);
+
+            if(this.verifyPermission(permissionCheck)) startActivity(intent);
+
+            else {
+                ActivityCompat.requestPermissions(this, new String[]{ android.Manifest.permission.INTERNET },1);
+            }
+
         });
 
 
